@@ -2,11 +2,6 @@
 
 #include <cstdlib>
 
-Move* Computer::makeMove() {
-  const std::string move[] = {"Rock",   "Paper",  "Scissors", "Robot",
-                              "Monkey", "Pirate", "Ninja",    "Zombie"};
-  int i = rand() % 8;
-  return new Move(move[i]);
-}
+Move* Computer::makeMove() { return new Move("Rock"); }
 
 std::string Computer::getName() { return "Computer"; }
