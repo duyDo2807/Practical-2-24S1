@@ -9,4 +9,4 @@ Move* Computer::makeMove() {
   return new Move(move[i]);
 }
 
-std::string Computer::getName() const { return "Computer"; }
+std::string Computer::getName() { return "Computer"; }

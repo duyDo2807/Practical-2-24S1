@@ -9,7 +9,7 @@ class Move {
 
  public:
   Move(std::string moveName);
-  std::string getName() const;
+  std::string getName();
 };
 
 #endif

@@ -11,4 +11,4 @@ Move* Human::makeMove() {
   return new Move(moveName);
 };
 
-std::string Human::getName() const { return name; }
+std::string Human::getName() { return name; }

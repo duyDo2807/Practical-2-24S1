@@ -9,7 +9,7 @@ class Human : public Player {
  public:
   Human(std::string name = "Human");
   Move* makeMove() override;
-  std::string getName() const override;
+  std::string getName() override;
 };
 
 #endif

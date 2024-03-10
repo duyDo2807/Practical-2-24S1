@@ -1,6 +1,6 @@
 #include "Referee.h"
 
-#include <unordered_map>
+#include <unordered_set>
 
 #include "Move.h"
 
@@ -10,32 +10,42 @@ Player* Referee::refGame(Player* player1, Player* player2) {
   Move* play1 = player1->makeMove();
   Move* play2 = player2->makeMove();
 
-  std::unordered_map<std::string, std::string> result1 = {
-      {"Rock", "Scissors"}, {"Paper", "Rock"}, {"Scissors", "Paper"}};
-  std::unordered_map<std::string, std::string> result2 = {
-      {"Monkey", "Ninja"}, {"Monkey", "Robot"}, {"Robot", "Ninja"},
-      {"Robot", "Zombie"}, {"Pirate", "Robot"}, {"Pirate", "Monkey"},
-      {"Ninja", "Pirate"}, {"Ninja", "Zombie"}, {"Zombie", "Pirate"},
-      {"Zombie", "Monkey"}};
+  std::unordered_set<std::string> RPS = {"Rock", "Paper", "Scissors"};
+  std::unordered_set<std::string> MRPNZ = {"Monkey", "Robot", "Pirate", "Ninja",
+                                           "Zombie"};
 
-  std::string move1Name = play1->getName();
-  std::string move2Name = play2->getName();
+  std::string p1 = play1->getName();
+  std::string p2 = play2->getName();
+
+  std::cout << p1;
+  std::cout << p2;
 
   delete play1;
   delete play2;
 
-  if (result1.find(move1Name) != result1.end() &&
-      result1[move1Name] == move2Name)
-    return player1;
-  else if (result1.find(move2Name) != result1.end() &&
-           result1[move2Name] == move1Name)
-    return player2;
-  else if (result2.find(move1Name) != result2.end() &&
-           result2[move1Name] == move2Name)
-    return player1;
-  else if (result2.find(move2Name) != result2.end() &&
-           result2[move2Name] == move1Name)
-    return player2;
-  else
+  if (RPS.count(p1) && RPS.count(p2)) {
+    if (p1 == p2) {
+      return nullptr;
+    } else if ((p1 == "Rock" && p2 == "Scissors") ||
+               (p1 == "Scissors" && p2 == "Paper") ||
+               (p1 == "Paper" && p2 == "Rock")) {
+      return player1;
+    } else {
+      return player2;
+    }
+  } else if (MRPNZ.count(p1) && MRPNZ.count(p2)) {
+    if (p1 == p2) {
+      return nullptr;
+    } else if ((p1 == "Robot" && (p2 == "Ninja" || p2 == "Zombie")) ||
+               (p1 == "Pirate" && (p2 == "Robot" || p2 == "Monkey")) ||
+               (p1 == "Ninja" && (p2 == "Pirate" || p2 == "Zombie")) ||
+               (p1 == "Monkey" && (p2 == "Robot" || p2 == "Ninja")) ||
+               (p1 == "Zombie" && (p2 == "Monkey" || p2 == "Pirate"))) {
+      return player1;
+    } else {
+      return player2;
+    }
+  } else {
     return nullptr;
+  }
 }

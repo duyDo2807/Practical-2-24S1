@@ -1,3 +1,5 @@
 #include "Player.h"
 
-std::string Player::getName() const { return "Human"; }
+Move* Player::makeMove() { return 0; }
+
+std::string Player::getName() { return "Human"; }

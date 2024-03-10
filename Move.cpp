@@ -2,4 +2,4 @@
 
 Move::Move(std::string moveName) : name(moveName) {}
 
-std::string Move::getName() const { return name; }
+std::string Move::getName() { return name; }
